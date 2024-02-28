@@ -20,7 +20,7 @@ Instructions:
 Clone this repository:
 
 Bash
-git clone https://github.com/lswebdevelops/mern-starter-app.git
+git clone [https://github.com/lswebdevelops/mern-starter-app.git](https://github.com/lswebdevelops/MERN-Book_Library-Reactjs-nodejs-mongodb)
 Use code with caution.
 Install dependencies:
 
