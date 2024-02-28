@@ -3,6 +3,7 @@ import Home from "./routes/Home/home";
 import Book from "./routes/Book/book";
 import SingleBook from "./routes/Book/singleBook";
 import CreateBook from "./routes/Book/createBook";
+import EditBook from "./routes/Book/editBook";
 import About from './routes/About/about'
 
 import Header from "./components/Header";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/books" element={<Book />} />
           <Route path="/books/:slug" element={<SingleBook />} />
           <Route path="/createbook" element={<CreateBook />} />
+          <Route path="/editbook/:slug" element={<EditBook />} />
         </Routes>
         <Footer />
       </Router>

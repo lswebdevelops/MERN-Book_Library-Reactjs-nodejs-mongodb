@@ -147,6 +147,42 @@ app.delete("/api/books/:id", async(req,res) => {
 //   }
 // });
 
+
+
+
+
+// update book
+
+app.put("/api/books", async (req, res) => {
+  try {
+
+    const bookId = req.body.bookId;
+      
+    const updateBook = {
+      title: req.body.title,
+      slug: req.body.slug,
+      stars: req.body.stars,
+      description: req.body.description,
+      category: req.body.category,
+
+       
+    }
+
+    if(req.file) {
+      updateBook.thumbnail = req.file.filename;
+
+
+    }
+
+    await Book.findByIdAndUpdate(bookId, updateBook);
+
+    res.json("Data Submitted");
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching books." });
+  }
+});
+
+
 app.get("/", (req, res) => {
   res.json("Hello mate!");
 });
