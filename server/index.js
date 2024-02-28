@@ -11,12 +11,25 @@ connectDB();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/uploads", express.static("uploads"))
 
 // get books
 app.get("/api/books", async (req, res) => {
   try {
+
+    const category = req.query.category;
+    // const stars = req.query.stars;
+    // console.log(category);
+
+    const filter = {};
+    if(category) {
+      filter.category = category
+
+    }
+
+
     // const data = await Book.find({}).limit(2);
-    const data = await Book.find({});
+    const data = await Book.find(filter);
     res.json(data );
   } catch (error) {
     res.status(500).json({ error: "An error occurred while fetching books." });
