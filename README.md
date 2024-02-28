@@ -20,7 +20,7 @@ Instructions:
 Clone this repository:
 
 Bash
-git clone https://github.com/<your-username>/mern-starter-app.git
+git clone https://github.com/lswebdevelops/mern-starter-app.git
 Use code with caution.
 Install dependencies:
 
