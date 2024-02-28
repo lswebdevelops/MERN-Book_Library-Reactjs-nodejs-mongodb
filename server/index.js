@@ -52,6 +52,26 @@ app.get("/api/books/:slug", async (req, res) => {
 });
 
 
+// add book
+app.post("/api/books", async (req, res) => {
+  try {
+console.log(req.body);
+   
+    const newBook = new Book({
+      title: req.body.title,
+      slug: req.body.slug,
+      stars: req.body.stars,
+      description: req.body.description,
+      category: req.body.category,
+      // thumbnail: req.body.thumbnail
+    })
+    await Book.create(newBook)
+    res.json("data submited" );
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching books." });
+  }
+});
+
 
 
 
@@ -78,6 +98,10 @@ app.listen(PORT, () => {
 });
 
 
-// 59:45 / 2:02:53 Single Book
 
+
+
+
+
+// 1:35:58 / 2:02:53 Add Book
 
