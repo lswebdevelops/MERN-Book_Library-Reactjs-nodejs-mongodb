@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import NoImageSelected from "../../assets/no-image-selected.jpg";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditBook() {
+  const navigate = useNavigate();
   const urlSlug = useParams();
   const baseUrl = `http://localhost:8000/api/books/${urlSlug.slug}`;
 
@@ -16,19 +16,16 @@ function EditBook() {
   const [submitted, setSubmitted] = useState("");
   const [image, setImage] = useState("");
 
-  // console.log(baseUrl);
-
   const fetchData = async () => {
     try {
       const response = await fetch(baseUrl);
+
       if (!response.ok) {
         throw new Error("Failed to fetch data.");
       }
 
       const data = await response.json();
-
       setBookId(data._id);
-
       setTitle(data.title);
       setSlug(data.slug);
       setStars(data.stars);
@@ -49,7 +46,6 @@ function EditBook() {
     console.table([title, slug]);
 
     const formData = new FormData();
-
     formData.append("bookId", bookId);
     formData.append("title", title);
     formData.append("slug", slug);
@@ -90,6 +86,26 @@ function EditBook() {
     }
   };
 
+  const removeBook = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/books/" + bookId,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        navigate("/books");
+        console.log("Book removed.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <h1>Edit Book</h1>
@@ -97,6 +113,10 @@ function EditBook() {
         This is where we use NodeJs, Express & MongoDB to grab some data. The
         data below is pulled from a MongoDB database.
       </p>
+
+      <button onClick={removeBook} className="delete">
+        Delete Book
+      </button>
 
       {submitted ? (
         <p>Data subitted successfully!</p>
@@ -106,11 +126,12 @@ function EditBook() {
             <label>Upload Thumbnail</label>
 
             {image ? (
-              <img src={`${image}`} alt={title}/>
+              <img className="img-single-book" src={`${image}`} alt="preview image" />
             ) : (
               <img
+              className="img-single-book" 
                 src={`http://localhost:8000/uploads/${thumbnail}`}
-                alt={title}
+                alt="preview image"
               />
             )}
             <input
@@ -166,7 +187,7 @@ function EditBook() {
               />
             </div>
 
-            <input type="submit" value={"➕ Update Info"} />
+            <input type="submit" />
           </div>
         </form>
       )}
