@@ -52,7 +52,7 @@ function Book() {
           <option value="food">Food</option>
           <option value="adventure">Adventure</option>
           <option value="thriller">Thriller</option>
-          <option value="fiction">Science Fiction</option>
+          <option value="fiction">Fiction</option>
           <option value="other">other</option>
         </select>
       </div>

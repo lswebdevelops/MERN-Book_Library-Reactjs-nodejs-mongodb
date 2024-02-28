@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home/home";
 import Book from "./routes/Book/book";
+import SingleBook from "./routes/Book/singleBook";
 import About from './routes/About/about'
 
 import Header from "./components/Header";
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/books" element={<Book />} />
+          <Route path="/books/:slug" element={<SingleBook />} />
         </Routes>
         <Footer />
       </Router>

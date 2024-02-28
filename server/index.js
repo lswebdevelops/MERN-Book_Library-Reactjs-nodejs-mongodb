@@ -36,6 +36,34 @@ app.get("/api/books", async (req, res) => {
   }
 });
 
+
+
+
+// book page
+app.get("/api/books/:slug", async (req, res) => {
+  try {
+
+    const slupParam = req.params.slug
+    const data = await Book.findOne({slug: slupParam});
+    res.json(data );
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching books." });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/", (req, res) => {
   res.json("Hello Mate!");
 });
@@ -48,3 +76,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on Port: ${PORT}`);
 });
+
+
+// 59:45 / 2:02:53 Single Book
+
+
